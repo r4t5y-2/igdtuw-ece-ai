@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <link rel="icon"type="image/png" href="favi.png">
+    <title>FinRepute</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    colors: {
+
+                        wine: {
+                            50: "#fbf4f5",
+                            100: "#f6e7e9",
+                            200: "#edcdd1",
+                            300: "#dda6ad",
+                            400: "#c97682",
+                            500: "#aa4554",
+                            600: "#8d2d3d",
+                            700: "#762330",
+                            800: "#601e29",
+                            900: "#511b25"
+                        }
+
+                    },
+
+                    fontFamily: {
+
+                        sans: [
+                            "Inter",
+                            "ui-sans-serif",
+                            "system-ui",
+                            "sans-serif"
+                        ]
+
+                    }
+
+                }
+
+            }
+
+        };
+
+    </script>
+
+</head>
+
+
+<body class="bg-[#F1E9D2] text-slate-900 font-sans">
+
+
+<!-- ================================================= -->
+<!-- NAVBAR -->
+<!-- ================================================= -->
+
+<header class="bg-white border-b border-slate-200">
+
+    <div
+        class="max-w-[1400px] mx-auto px-10 h-20 flex items-center justify-between"
+    >
+
+        <!-- LOGO -->
+
+        <div class="flex items-center gap-3">
+
+            <div
+                class="w-10 h-10 bg-wine-700 text-[#F5E6D3] rounded-xl flex items-center justify-center font-extrabold text-lg"
+            >
+                F
+            </div>
+
+            <div>
+
+                <h1 class="text-xl font-bold tracking-tight">
+                    FinRepute
+                </h1>
+
+                <p class="text-[11px] text-slate-400 tracking-wide uppercase">
+                    Financial Trust Platform
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="hidden md:flex items-center gap-8 text-sm">
+
+            <button
+          class="px-8 py-4 bg-wine-700 text-[#F5E6D3] rounded-full flex items-center justify-center font-semibold text-lg transition-transform duration-200 hover:scale-105 active:scale-110">               
+            
+                Dashboard
+            </button>
+
+            <button
+                onclick="showReputation()"
+                class="px-8 py-4 bg-wine-700 text-[#F5E6D3] rounded-full flex items-center justify-center font-semibold text-lg transition-transform duration-200 hover:scale-105 active:scale-110">
+            
+                Reputation
+            </button>
+
+            <button
+                onclick="showTransactions()"
+                class="px-8 py-4 bg-wine-700 text-[#F5E6D3] rounded-full flex items-center justify-center font-semibold text-lg transition-transform duration-200 hover:scale-105 active:scale-110">
+            
+                Transactions
+            </button>
+
+            <button
+                onclick="showLoan()"
+                class="px-8 py-4 bg-wine-700 text-[#F5E6D3] rounded-full flex items-center justify-center font-semibold text-lg transition-transform duration-200 hover:scale-105 active:scale-110">
+            
+                Loans
+            </button>
+
+        </nav>
+
+
+        <!-- USER -->
+
+        <div class="flex items-center gap-3">
+
+            <div class="text-right hidden sm:block">
+
+                <p class="text-sm font-semibold">
+                    Demo User
+                </p>
+
+                <p class="text-[11px] text-slate-400">
+                    FR-2026-08421
+                </p>
+
+            </div>
+
+
+            <div
+                class="w-10 h-10 rounded-full bg-wine-100 text-wine-700 flex items-center justify-center font-bold"
+            >
+                DU
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================================================= -->
+<!-- MAIN -->
+<!-- ================================================= -->
+
+<main class="max-w-[1400px] mx-auto px-10 py-10">
+
+
+    <!-- PAGE INTRO -->
+
+    <div class="flex items-end justify-between mb-10">
+
+        <div>
+
+            <p
+                class="text-xs uppercase tracking-[0.18em] text-wine-700 font-bold mb-3"
+            >
+                Personal Finance
+            </p>
+
+            <h2
+                class="text-4xl font-bold tracking-tight text-slate-950"
+            >
+                Your financial reputation
+            </h2>
+
+            <p class="text-slate-500 mt-3 max-w-xl">
+
+                Build a trusted financial identity through
+                consistent and responsible financial behaviour.
+
+            </p>
+
+        </div>
+
+
+        <div class="hidden md:block text-right">
+
+            <p class="text-xs text-slate-400">
+                FINREPUTE ID
+            </p>
+
+            <p class="font-semibold text-slate-700 mt-1">
+                FR-2026-08421-0999
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SCORE / BALANCE / PROGRESS -->
+    <!-- ================================================= -->
+
+    <div class="grid grid-cols-12 gap-6 mb-6">
+
+
+        <!-- SCORE -->
+
+        <section
+            class="col-span-12 lg:col-span-5 bg-wine-800 text-white rounded-2xl p-8 relative overflow-hidden"
+        >
+
+            <!-- Decorative circle -->
+
+            <div
+                class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-wine-700 opacity-50"
+            ></div>
+
+
+            <div class="relative">
+
+                <div class="flex items-center justify-between">
+
+                    <p
+                        class="text-xs uppercase tracking-widest text-wine-200 font-semibold"
+                    >
+                        FinRepute Score
+                    </p>
+
+                    <span
+                        id="status"
+                        class="bg-white/10 border border-white/20 px-3 py-1 rounded-full text-[11px] font-bold"
+                    >
+                        NEW USER
+                    </span>
+
+                </div>
+
+
+                <div class="mt-8 flex items-end gap-3">
+
+                    <span
+                        id="score"
+                        class="text-7xl font-bold tracking-tight"
+                    >
+                        0
+                    </span>
+
+                    <span class="text-wine-200 mb-3">
+                    
+                    </span>
+
+                </div>
+
+
+                <p class="text-sm text-wine-100 mt-4 max-w-sm">
+
+                    Your reputation starts at zero and grows
+                    as you build a consistent financial history.
+
+                </p>
+
+
+                <div class="mt-8">
+
+                    
+
+
+                    
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- BALANCE -->
+
+        <section
+            class="col-span-12 md:col-span-6 lg:col-span-3 bg-[#FCF5F6] border border-slate-200 rounded-2xl p-7"
+        >
+
+            <p class="text-xs uppercase tracking-widest text-wine-700-slate-400 font-semibold">
+                Available Balance
+            </p>
+
+
+            <h3
+                id="balance"
+                class="text-4xl font-bold tracking-tight mt-6"
+            >
+                ₹5,240
+            </h3>
+
+
+            <div class= mt-8 pt-5 border-t border-slate-100">
+
+                <p class="text-s text-wine-700 slate-400">
+                    Current account status
+                </p>
+
+                <p class="text-sm text-emerald-600 font-semibold mt-1">
+                    Healthy cash flow
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- TRUST -->
+
+        <section
+            class="col-span-12 md:col-span-6 lg:col-span-4 bg-wine-700 border border-slate-200 rounded-2xl p-7"
+        >
+
+            <div class="flex justify-between items-start">
+
+                <div>
+
+                    <p class="text-xs uppercase tracking-widest text-[#F5E6D3] slate-400 font-semibold">
+                        Trust Profile
+                    </p>
+
+                    <h3 class="text-[#F5E6D3] xl font-bold mt-3">
+                        Reputation Factors
+                    </h3>
+
+                </div>
+
+
+                <div
+                    class="w-10 h-10 rounded-xl bg-wine-50 text-wine-700 flex items-center justify-center"
+                >
+                    ✓
+                </div>
+
+            </div>
+
+
+            <div class="mt-7 space-y-5">
+
+
+                <!-- TRANSACTIONS -->
+
+                <div>
+
+                    <div class="flex justify-between text-xs mb-2">
+
+                        <span class="text-[#F5E6D3] slate-500">
+                            Transaction History
+                        </span class="px-4 py-2 rounded-full bg-wine-700 font-semibold"
+                   style="color: #F5E6D3;">
+    12 Transactions
+</span> 
+                          </span>
+                    
+
+                    </div>
+
+
+                    
+
+                        
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REPAYMENT -->
+
+                <div>
+
+                    <div class="flex justify-between text-xs mb-2">
+
+                        <span class="text- #F5E6D3 slate-500">
+                            Repayment Behaviour
+                        </span>
+
+                    
+
+                    </div>
+
+
+                    <div class="h-1.5 bg-slate-100 rounded-full">
+
+                        <div
+                            id="repaymentBar"
+                            class="h-1.5 bg-wine-700 rounded-full transition-all duration-500"
+                            style="width:0%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACCOUNT -->
+
+                <div>
+
+                    <div class="flex justify-between text-xs mb-2">
+
+                        <span class="text-slate-500">
+                            Account Activity
+                        </span>
+
+                        <span
+                            id="activityPercent"
+                            class="font-semibold"
+                        >
+                            0%
+                        </span>
+
+                    </div>
+
+
+                    <div class="h-1.5 bg-slate-100 rounded-full">
+
+                        <div
+                            id="activityBar"
+                            class="h-1.5 bg-wine-700 rounded-full transition-all duration-500"
+                            style="width:0%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- QUICK ACTIONS -->
+    <!-- ================================================= -->
+
+    <section
+        class="bg-white border border-slate-200 rounded-2xl p-7 mb-6"
+    >
+
+        <div class="flex items-center justify-between">
+
+            <div>
+
+                <p
+                    class="text-xs uppercase tracking-widest text-wine-700 font-bold"
+                >
+                    Financial Actions
+                </p>
+
+                <h3 class="text-xl font-bold mt-2">
+                    Manage your finances
+                </h3>
+
+            </div>
+
+
+            <p class="text-xs text-slate-400">
+                Demo environment
+            </p>
+
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+
+
+            <!-- SEND -->
+
+            <button
+                onclick="showSend()"
+                class="group text-left border border-slate-200 rounded-xl p-5 hover:border-wine-300 hover:bg-wine-50 transition"
+            >
+
+                <div
+                    class="w-10 h-10 rounded-lg bg-wine-700 text-white flex items-center justify-center font-bold"
+                >
+                    ₹
+                </div>
+
+                <h4 class="font-bold mt-4">
+                    Send Money
+                </h4>
+
+                <p class="text-xs text-slate-500 mt-1">
+                    Make a transaction and build your history.
+                </p>
+
+                <p class="text-wine-700 text-sm font-semibold mt-4">
+                    Start →
+                </p>
+
+            </button>
+
+
+
+            <!-- REPUTATION -->
+
+            <button
+                onclick="showReputation()"
+                class="group text-left border border-slate-200 rounded-xl p-5 hover:border-wine-300 hover:bg-wine-50 transition"
+            >
+
+                <div
+                    class="w-10 h-10 rounded-lg bg-wine-100 text-wine-700 flex items-center justify-center font-bold"
+                >
+                    ★
+                </div>
+
+                <h4 class="font-bold mt-4">
+                    Build Reputation
+                </h4>
+
+                <p class="text-xs text-slate-500 mt-1">
+                    Record responsible financial behaviour.
+                </p>
+
+                <p class="text-wine-700 text-sm font-semibold mt-4">
+                    Improve score →
+                </p>
+
+            </button>
+
+
+
+            <!-- LOAN -->
+
+            <button
+                onclick="showLoan()"
+                class="group text-left border border-slate-200 rounded-xl p-5 hover:border-wine-300 hover:bg-wine-50 transition"
+            >
+
+                <div
+                    class="w-10 h-10 rounded-lg bg-wine-100 text-wine-700 flex items-center justify-center font-bold"
+                >
+                    +
+                </div>
+
+                <h4 class="font-bold mt-4">
+                    Check Loan
+                </h4>
+
+                <p class="text-xs text-slate-500 mt-1">
+                    See how your reputation affects eligibility.
+                </p>
+
+                <p class="text-wine-700 text-sm font-semibold mt-4">
+                    Check eligibility →
+                </p>
+
+            </button>
+
+        </div>
+
+
+        <!-- DYNAMIC CONTENT -->
+
+        <div id="content" class="mt-6"></div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- TRANSACTION HISTORY -->
+    <!-- ================================================= -->
+
+    <section
+        class="bg-white border border-slate-200 rounded-2xl p-7"
+    >
+
+        <div class="flex items-center justify-between mb-4">
+
+            <div>
+
+                <p
+                    class="text-xs uppercase tracking-widest text-wine-700 font-bold"
+                >
+                    Financial Activity
+                </p>
+
+                <h3 class="text-xl font-bold mt-2">
+                    Recent Transactions
+                </h3>
+
+            </div>
+
+            <span
+                class="text-xs text-slate-400"
+            >
+                Latest activity
+            </span>
+
+        </div>
+
+
+        <div
+            id="transactionList"
+            class="divide-y divide-slate-100"
+        >
+
+            <div
+                class="py-8 text-center text-slate-400 text-sm"
+            >
+                No transactions yet.
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
