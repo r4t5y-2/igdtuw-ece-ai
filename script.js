@@ -4,7 +4,7 @@
 
 let score = 0;
 
-let balance = 5240;
+let balance = 5000;
 
 let transactions = [];
 
@@ -43,7 +43,15 @@ function updateDashboard() {
         Math.min(Math.round(score / 1.5), 100);
 
 
+    setText("transactionPercent", transactionScore + "%");
+    setWidth("transactionBar", transactionScore + "%");
     setText("transactionCount", transactions.length + (transactions.length === 1 ? " transaction" : " transactions"));
+
+    setText("repaymentPercent", repaymentScore + "%");
+    setWidth("repaymentBar", repaymentScore + "%");
+
+    setText("activityPercent", activityScore + "%");
+    setWidth("activityBar", activityScore + "%");
 
 
     // ======================================
@@ -158,7 +166,7 @@ function showSend() {
 
             <button
                 onclick="sendMoney()"
-                class="w-full bg-wine-700 text-white rounded-lg p-3 mt-6 font-semibold"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-3 mt-6 font-semibold transition-all"
             >
                 Send Money
             </button>
@@ -231,11 +239,14 @@ function sendMoney() {
 
     // ======================================
     // INCREASE SCORE
+    // Amounts under ₹100 earn 10 points,
+    // ₹100 and above earn 50 points.
     // ======================================
-   if (amount>100)
-    score += 50;
-   else 
-    score +=10
+
+    let pointsEarned = amount < 100 ? 10 : 50;
+
+    score += pointsEarned;
+
 
     if (score > 850) {
 
@@ -342,7 +353,7 @@ function sendMoney() {
                 </p>
 
                 <p class="text-indigo-600 font-bold mt-1">
-                    FinRepute Score updated
+                    FinRepute Score +${pointsEarned}
                 </p>
 
             </div>
